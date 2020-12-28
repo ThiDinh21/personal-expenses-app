@@ -114,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    final bool isLandscape = mediaQuery.orientation == Orientation.landscape;
+    final bool isLandscape = (mediaQuery.orientation == Orientation.landscape);
 
     final PreferredSizeWidget appBar = Platform.isIOS
         ? CupertinoNavigationBar(
