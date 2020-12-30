@@ -157,31 +157,29 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
   }
 
-  Widget _buildIOSAppbar() {
-    return CupertinoNavigationBar(
-      middle: Text('Personal expenses'),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          GestureDetector(
-            child: Icon(CupertinoIcons.add),
-            onTap: () => _startAddingNewTransaction(context),
+  Widget _buildAppbar() {
+    return Platform.isIOS
+        ? CupertinoNavigationBar(
+            middle: Text('Personal expenses'),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                GestureDetector(
+                  child: Icon(CupertinoIcons.add),
+                  onTap: () => _startAddingNewTransaction(context),
+                )
+              ],
+            ),
           )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAndroidAppbar() {
-    return AppBar(
-      title: Text('Personal expenses'),
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.add),
-          onPressed: () => _startAddingNewTransaction(context),
-        )
-      ],
-    );
+        : AppBar(
+            title: Text('Personal expenses'),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () => _startAddingNewTransaction(context),
+              )
+            ],
+          );
   }
 
   @override
@@ -189,8 +187,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final mediaQuery = MediaQuery.of(context);
     final bool isLandscape = (mediaQuery.orientation == Orientation.landscape);
 
-    final PreferredSizeWidget appBar =
-        Platform.isIOS ? _buildIOSAppbar() : _buildAndroidAppbar();
+    final PreferredSizeWidget appBar = _buildAppbar();
 
     final transactionListWidget = Container(
       height: (MediaQuery.of(context).size.height -
