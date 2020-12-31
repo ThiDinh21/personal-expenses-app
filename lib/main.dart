@@ -66,7 +66,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   final List<Transaction> _transactions = [];
 
   List<Transaction> get _getRecentTransactions {
@@ -78,6 +78,23 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   bool _showChart = false;
+
+	@override
+  void initState() {
+    super.initState();
+		WidgetsBinding.instance.addObserver(this);
+  }
+
+	@override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
+  }
+
+	@override
+	dispose() {
+		WidgetsBinding.instance.removeObserver(this);
+		super.dispose();
+	}
 
   void _startAddingNewTransaction(ctx) {
     showModalBottomSheet(

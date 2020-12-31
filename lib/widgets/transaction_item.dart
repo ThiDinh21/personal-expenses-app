@@ -5,14 +5,14 @@ import '../models/transaction.dart';
 
 
 class TransactionItem extends StatelessWidget {
+	final Transaction transaction;
+  final Function deleteTransaction;
+	
   const TransactionItem({
     Key key,
-    @required Transaction transaction,
-    @required Function deleteTransaction,
-  }) : transaction = transaction, deleteTransaction = deleteTransaction, super(key: key);
-
-  final Transaction transaction;
-  final Function deleteTransaction;
+    @required this.transaction,
+    @required this.deleteTransaction,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
